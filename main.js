@@ -156,7 +156,7 @@ var Game;
 LoadScript(App.mods.BestDealHelper.dir + "/chroma.min.js");
 
 var PRM = {
-    displayname: "Payback Rate Mod",
+    displayname: "回报率模组",
     name: "Best Deal Helper", // the original name of the mod, keep for save compatibility
     version: "2048.07",
     isLoaded: false,
@@ -505,8 +505,8 @@ var PRM = {
 
     calcWaitingTime: function (
         /** @type {(Building|Upgrade)}*/ me
-        ) {
-            const bank = PRM.getBankCookies();
+    ) {
+        const bank = PRM.getBankCookies();
         let waitCookie = me.getPrice() + bank - Game.cookies;
         if (waitCookie < 0) return "";
 
@@ -724,49 +724,49 @@ var PRM = {
     addOptionsMenu: function () {
         const body = `
         <div class="listing">
-            ${PRM.button("enableSort", "Sort by best deal ON", "Sort by best deal OFF")}
+            ${PRM.button("enableSort", "按照回报率排序已启用", "按照回报率排序已禁用")}
         </div>
         <div class="listing">
-            ${PRM.button("sort Grandmapocalypse", 'Sort Grandmapocalypse ON', 'Sort Grandmapocalypse OFF')}
+            ${PRM.button("sortGrandmapocalypse", '按照老奶奶天启路线排序已启用', '按照老奶奶天启路线排序已禁用')}
         </div>
         <div class="listing">
             ${PRM.button(
             "sortWizardTower",
-            `Sort ${Game.Objects["Wizard tower"].dname} ON`,
-            `Sort ${Game.Objects["Wizard tower"].dname} OFF`)}
+            `按照${Game.Objects["Wizard tower"].dname}排序已启用`,
+            `按照${Game.Objects["Wizard tower"].dname}排序已禁用`)}
         </div>
         <div class="listing">
-            ${PRM.button("isBanking", "Banking cookies ON", "Banking cookies OFF")}
-            ${PRM.numberInput("bankingSeconds")}<label>(items will get locked to keep at least X second of cookies in bank. 6000 CpS(42000 with Get Lucky upgrade) for maximum Lucky! payout; 43200 CpS(302400 with Get Lucky upgrade) for maximum Cookie chain payout)</label>
+            ${PRM.button("isBanking", "饼干银行已启用", "饼干银行已禁用")}
+            ${PRM.numberInput("bankingSeconds")}<label>(在银行里达到至少 X 秒的饼干数之前会锁定物品。最高幸运时达到 6000 CpS (获得幸运升级则为 42000) 回报率；最高饼干回报率时达到 43200 CpS (获得幸运升级则为 302400))</label>
         </div>
         <div class="listing">
-            ${PRM.intervalInput("updateMS", "Update Interval(ms)")}<label>(increase it if game lags)</label>
+            ${PRM.intervalInput("updateMS", "更新间隔 (毫秒)")}<label>(如果游戏卡顿，请增加间隔)</label>
         </div>
         <div class="listing">
-            ${PRM.colorPicker("color0")}<label>(best deal color)</label>
+            ${PRM.colorPicker("color0")}<label>(最优回报率对应颜色)</label>
         </div>
         <div class="listing">
-            ${PRM.colorPicker("color1")}<label>(2nd deal color)</label>
+            ${PRM.colorPicker("color1")}<label>(次优回报率对应颜色)</label>
         </div>
         <div class="listing">
-            ${PRM.colorPicker("color7")}<label>(8st deal color)</label>
+            ${PRM.colorPicker("color7")}<label>(前 8 项回报率对应颜色)</label>
         </div>
         <div class="listing">
-            ${PRM.colorPicker("color15")}<label>(16st deal color)</label>
+            ${PRM.colorPicker("color15")}<label>(前 16 项回报率对应颜色)</label>
         </div>
         <div class="listing">
-            ${PRM.colorPicker("colorLast")}<label>(worst deal color)</label>
+            ${PRM.colorPicker("colorLast")}<label>(最差回报率对应颜色)</label>
         </div>`;
 
         CCSE.AppendCollapsibleOptionsMenu(PRM.displayname, body);
     },
 
     /**
-     * 
-     * @param {string} config 
-     * @param {string} textOn 
-     * @param {string} textOff 
-     * @returns 
+     *
+     * @param {string} config
+     * @param {string} textOn
+     * @param {string} textOff
+     * @returns
      */
     button: function (config, textOn, textOff) {
         const name = `PRM${config}Button`;
@@ -790,8 +790,8 @@ var PRM = {
     },
 
     /**
-     * 
-     * @param {string} config 
+     *
+     * @param {string} config
      * @returns {string}
      */
     numberInput: function (config) {
@@ -802,7 +802,7 @@ var PRM = {
     },
 
     /**
-     * 
+     *
      * @param {string} config
      * @param {string} name
      * @param {number} min
@@ -832,8 +832,8 @@ var PRM = {
     },
 
     /**
-     * 
-     * @param {string} config 
+     *
+     * @param {string} config
      * @returns {string}
      */
     colorPicker: function (config) {
@@ -842,11 +842,11 @@ var PRM = {
         const defaultColor = PRM.default_config[config];
         const reset = `PRM.config.${config}='${defaultColor}';l('${pickerID}').value='${defaultColor}';`;
         const value = PRM.config[config];
-        return `<input type="color" id="${pickerID}" value=${value} oninput="${callback}"> <a class="option" ${Game.clickStr}="${reset}">Reset</a>`;
+        return `<input type="color" id="${pickerID}" value=${value} oninput="${callback}"> <a class="option" ${Game.clickStr}="${reset}">重置</a>`;
     },
 
-    /** 
-     * @param {string} config 
+    /**
+     * @param {string} config
      * @param {string} pickerID
      */
     colorPickerCallback: function (config, pickerID) {
